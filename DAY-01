@@ -1,3 +1,28 @@
+
+//using BRUTE_FORCE :
+//time complexity: O(N^2)
+//space complexity: O(1)
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        for (int i = 0; i < nums.size(); i++) {
+            for (int j = i + 1; j < nums.size(); j++) {
+                if (nums[i] + nums[j] == target) {
+                    return {i, j};
+                }
+            }
+        }
+        return {};
+    }
+};
+
+
+
+
+//using 2 pass hash table :
+//time complexity: O(N)
+//space complexity: O(N)
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -20,3 +45,50 @@ public:
         return {}; // No solution found
     }
 };
+
+
+
+//using 1 pass hash table :
+//time complexity: O(N)
+//space complexity: O(N)
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> numMap;
+        int n = nums.size();
+
+        for (int i = 0; i < n; i++) {
+            int complement = target - nums[i];
+            if (numMap.count(complement)) {
+                return {numMap[complement], i};
+            }
+            numMap[nums[i]] = i;
+        }
+
+        return {}; // No solution found
+    }
+};
+
+
+
+//using 2 pointer:
+//time complexity: O(N log N)
+//space complexity: O()
+class Solution {
+public:
+
+        vector<int> twoSum(vector<int>& nums, int target) {
+    unordered_map<int, int> numToIndex;
+    for (int i = 0; i < nums.size(); i++) {
+        int complement = target - nums[i];
+        if (numToIndex.find(complement) != numToIndex.end()) {
+            return {numToIndex[complement], i};
+        }
+        numToIndex[nums[i]] = i;
+    }
+    return {}; // No solution found!
+}
+        
+    };
+
+
